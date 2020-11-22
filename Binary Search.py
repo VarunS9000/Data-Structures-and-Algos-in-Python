@@ -1,21 +1,23 @@
-data=[1,2,3,4,5,6]
+data=[1,2,3,4,5,7,9]
 
 def binarySearch(data,start,end,element):
-    mid=(end+start-1)//2
+    if end>=start:
+        mid=(end+start-1)//2
 
-    if(data[mid]==element):
-        print("element found")
-        
+        if(data[mid]==element):
+            print("element found at position",mid+1)
+            
 
-    elif(element<data[mid]):
-        end=mid-1
-        start=0
-        binarySearch(data,start,end,element)
-        
-    elif(element>data[mid]):
-        end=len(data)-1
-        start=mid+1
-        binarySearch(data,start,end,element)
+        elif(element<data[mid]):
+            binarySearch(data,start,mid-1,element)
+            
+        elif(element>data[mid]):
+            binarySearch(data,mid+1,end,element)
+
+    else:
+        print("Not found")
+
+   
         
 
 n=int(input("enter number to be searched"))
