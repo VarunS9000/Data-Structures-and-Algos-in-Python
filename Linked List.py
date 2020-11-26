@@ -60,6 +60,31 @@ def deleteEnd(current,start):
     current=None
     precurrent.next=None
     show(current,start)
+
+def reverse(start):
+    next_node=start.next
+    next_next_node=start.next.next
+    start.next.next=start
+    curr=next_node
+    start.next=None
+
+    while curr:
+        next_node=next_next_node
+        next_next_node=next_node.next
+        next_node.next=curr
+        curr=next_node
+        next_next_node=next_next_node
+        if(next_next_node is None):
+           start=curr
+           show(current,start)
+           break
+
+    return start
+       
+
+       
+       
+
     
 
     
@@ -74,7 +99,7 @@ n=int(input("Enter initial value of node"))
 start=Node(n)
 current=start
 
-print("1.Insert in End\n2.Insert After\n3.Delete Value\n4.Delete End")
+print("1.Insert in End\n2.Insert After\n3.Delete Value\n4.Delete End\n5.Reverse")
 
 
 
@@ -98,6 +123,9 @@ while True:
 
     elif(x==4):
         deleteEnd(current,start)
+
+    elif(x==5):
+        start=reverse(start)
 
     elif(x==0):
         break
