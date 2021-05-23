@@ -50,6 +50,20 @@ def search(root,x):
     else:
         print("element does not exist")
 
+
+def maxDepth(root):
+    if(root is None):
+        return
+    else:
+        ld=maxDepth(root.left)
+        rd=maxDepth(root.right)
+
+        if(ld>=rd):
+            return ld+1
+
+        else:
+            return rd+1
+
 y=int(input("enter tree root value"))
 
 Root=Node(y)
@@ -80,8 +94,3 @@ while True:
         break
             
         
-
-        
-
-
-
