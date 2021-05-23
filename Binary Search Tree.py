@@ -53,7 +53,7 @@ def search(root,x):
 
 def maxDepth(root):
     if(root is None):
-        return
+        return 0
     else:
         ld=maxDepth(root.left)
         rd=maxDepth(root.right)
