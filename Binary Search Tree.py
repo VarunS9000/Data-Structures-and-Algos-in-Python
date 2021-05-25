@@ -53,7 +53,7 @@ def search(root,x):
 
 def maxDepth(root):
     if(root is None):
-        return 0
+        return
     else:
         ld=maxDepth(root.left)
         rd=maxDepth(root.right)
@@ -63,6 +63,20 @@ def maxDepth(root):
 
         else:
             return rd+1
+
+
+def invert(root):
+    if(root is None):
+        return
+    else:
+        temp=root
+        invert(root.left)
+        invert(root.right)
+
+        temp=root.left
+        root.left=root.right
+        root.right=temp
+        
 
 y=int(input("enter tree root value"))
 
