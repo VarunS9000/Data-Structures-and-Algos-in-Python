@@ -114,8 +114,11 @@ def displayShannonCodedFile(root,fileContents):
     for x in fileContents:
         shannonCode(root,x,'')
 
-   
+def binaryCodedFile(fileContents):
+    for x in fileContents:
+        print(bin(ord(x)).replace('0b',""),end="")
 
+   
 f=open('DeepBlue.txt','r')
 fc=f.read()
 frequency=preprocess(fc)
@@ -129,7 +132,7 @@ constructTree(Root,text)
 print('Inorder traversal of Shannon Tree')
 inorder(Root)
 while True:
-    print('\n1.Get shannon code for a particular character in file\n2.Get shannon code for the entire file\n3.Enter 3 to quit')
+    print('\n1.Get shannon code for a particular character in file\n2.Get shannon code for the entire file\n3.Get binary code for the entire file\n4.Press 4 to exit')
     option=int(input('Enter option'))
     if(option==1):
         charac=input('Enter character ')
@@ -139,6 +142,9 @@ while True:
         displayShannonCodedFile(Root,fc)
 
     elif(option==3):
+        binaryCodedFile(fc)
+
+    elif(option==4):
         break
     
 
