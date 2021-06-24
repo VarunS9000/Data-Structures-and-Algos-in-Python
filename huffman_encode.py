@@ -1,4 +1,4 @@
-
+codeMap={}
 class Huffman:
     def __init__(self,val,freq):
         self.val=val
@@ -85,6 +85,11 @@ def huffmanCode(root,character,binaryCode):
 
     else:
         print(binaryCode,end="")
+        codeMap[character]=binaryCode
+        
+        
+
+    
 
 def displayHuffmanCodedFile(root,fileContents):
     
@@ -109,7 +114,11 @@ while True:
     option=int(input('Enter option'))
     if(option==1):
         charac=input('Enter character ')
-        huffmanCode(Root,charac,'')
+        try:
+            print(codeMap[charac])
+
+        except:
+            huffmanCode(Root,charac,'')
 
     elif(option==2):
         displayHuffmanCodedFile(Root,fc)
