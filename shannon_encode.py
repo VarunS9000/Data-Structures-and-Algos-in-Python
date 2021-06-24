@@ -1,4 +1,4 @@
-
+codeMap={}
 class Shanon:
     def __init__(self,val):
         self.val=val
@@ -107,12 +107,16 @@ def shannonCode(root,character,binaryCode):
 
     else:
         print(binaryCode,end="")
+        codeMap[character]=binaryCode
 
 
 def displayShannonCodedFile(root,fileContents):
     
     for x in fileContents:
-        shannonCode(root,x,'')
+        try:
+            print(codeMap[x],end="")
+        except:
+            shannonCode(root,x,'')
 
 def binaryCodedFile(fileContents):
     for x in fileContents:
@@ -136,7 +140,11 @@ while True:
     option=int(input('Enter option'))
     if(option==1):
         charac=input('Enter character ')
-        shannonCode(Root,charac,'')
+        try:
+            print(codeMap[charac])
+
+        except:
+            shannonCode(Root,charac,'')
 
     elif(option==2):
         displayShannonCodedFile(Root,fc)
