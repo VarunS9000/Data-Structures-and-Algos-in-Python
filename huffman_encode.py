@@ -94,7 +94,10 @@ def huffmanCode(root,character,binaryCode):
 def displayHuffmanCodedFile(root,fileContents):
     
     for x in fileContents:
-        huffmanCode(root,x,'')
+        try:
+            print(codeMap[x],end="")
+        except:
+            huffmanCode(root,x,'')
 
 def binaryCodedFile(fileContents):
     for x in fileContents:
