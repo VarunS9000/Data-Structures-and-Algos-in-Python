@@ -1,4 +1,7 @@
 codeMap={}
+decodeMap={}
+decodeList=[]
+checkList=False
 class Huffman:
     def __init__(self,val,freq):
         self.val=val
@@ -44,6 +47,10 @@ def preprocess(contents):
 
     return huffmanObjects
 
+def decode():
+    for i in decodeList:
+        print(decodeMap[i],end="")
+
     
             
 
@@ -65,6 +72,14 @@ def huffmanTree(objectList):
     huffmanTree(objectList)
     return objectList[0]
 
+def mapConstruction(root,fileContents):
+    for character in fileContents:
+        huffmanCode(root,character,'')
+
+    print('Code Map : ',codeMap)
+    print('Decode Map : ',decodeMap)
+    checkList=True
+
 def huffmanCode(root,character,binaryCode):
     
     if(root.left is not None):
@@ -80,12 +95,13 @@ def huffmanCode(root,character,binaryCode):
              
              
              
-        else:
-            print('Not Found')
-
+        
     else:
-        print(binaryCode,end="")
+        
         codeMap[character]=binaryCode
+        decodeMap[binaryCode]=character
+        if not checkList:
+            decodeList.append(binaryCode)
         
         
 
@@ -94,10 +110,7 @@ def huffmanCode(root,character,binaryCode):
 def displayHuffmanCodedFile(root,fileContents):
     
     for x in fileContents:
-        try:
-            print(codeMap[x],end="")
-        except:
-            huffmanCode(root,x,'')
+        print(codeMap[x],end="")
 
 def binaryCodedFile(fileContents):
     for x in fileContents:
@@ -111,17 +124,14 @@ huffmanObjects=preprocess(fc)
 Root=huffmanTree(huffmanObjects)
 print('Inorder Traversal')
 inorder(Root)
+mapConstruction(Root,fc)
 
 while True:
-    print('\n1.Get huffman code for a particular character in file\n2.Get huffman code for the entire file\n3.Get binary code for the entire file\n4.Press 4 to exit')
+    print('\n1.Get huffman code for a particular character in file\n2.Get huffman code for the entire file\n3.Get binary code for the entire file\n4.Decode Huffman Code\n5.Press 5 to exit')
     option=int(input('Enter option'))
     if(option==1):
         charac=input('Enter character ')
-        try:
-            print(codeMap[charac])
-
-        except:
-            huffmanCode(Root,charac,'')
+        print(codeMap[charac])
 
     elif(option==2):
         displayHuffmanCodedFile(Root,fc)
@@ -130,6 +140,9 @@ while True:
         binaryCodedFile(fc)
 
     elif(option==4):
+        decode()
+
+    elif(option==5):
         break
 
 

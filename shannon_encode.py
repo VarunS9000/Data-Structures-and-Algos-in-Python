@@ -1,4 +1,7 @@
 codeMap={}
+decodeMap={}
+decodeList=[]
+checkList=False
 class Shanon:
     def __init__(self,val):
         self.val=val
@@ -28,6 +31,11 @@ def preprocess(contents):
         newFreq[t[0]]=t[1]
 
     return newFreq
+
+def decode():
+    for i in decodeList:
+        print(decodeMap[i],end="")
+        
 
 
 def splitText(text):
@@ -86,37 +94,45 @@ def constructTree(root,val):
         
         return root
 
+def mapConstruction(root,fileContents):
+    for character in fileContents:
+        shannonCode(root,character,'')
+
+    print('Code Map : ',codeMap)
+    print('Decode Map : ',decodeMap)
+    checkList=True
+
 
 def shannonCode(root,character,binaryCode):
-    
     if(root.left is not None):
-        if character in root.left.val:
-            binaryCode=binaryCode+'0'
-            shannonCode(root.left,character,binaryCode)
-            
-            
-            
-        elif character in root.right.val:
-             binaryCode=binaryCode+'1'
-             shannonCode(root.right,character,binaryCode)
+            if character in root.left.val:
+                binaryCode=binaryCode+'0'
+                shannonCode(root.left,character,binaryCode)
+                
+                
+                
+            elif character in root.right.val:
+                 binaryCode=binaryCode+'1'
+                 shannonCode(root.right,character,binaryCode)
+                 
              
              
-             
-        else:
-            print('Not Found')
+       
 
     else:
-        print(binaryCode,end="")
+           
         codeMap[character]=binaryCode
+        decodeMap[binaryCode]=character
+        if not checkList:
+            decodeList.append(binaryCode)
+    
+    
 
 
 def displayShannonCodedFile(root,fileContents):
     
     for x in fileContents:
-        try:
-            print(codeMap[x],end="")
-        except:
-            shannonCode(root,x,'')
+        print(codeMap[x],end="")
 
 def binaryCodedFile(fileContents):
     for x in fileContents:
@@ -135,16 +151,13 @@ Root=Shanon(text)
 constructTree(Root,text)
 print('Inorder traversal of Shannon Tree')
 inorder(Root)
+mapConstruction(Root,fc)
 while True:
-    print('\n1.Get shannon code for a particular character in file\n2.Get shannon code for the entire file\n3.Get binary code for the entire file\n4.Press 4 to exit')
+    print('\n1.Get shannon code for a particular character in file\n2.Get shannon code for the entire file\n3.Get binary code for the entire file\n4.Decode shannon code\n5.Press 5 to exit')
     option=int(input('Enter option'))
     if(option==1):
         charac=input('Enter character ')
-        try:
-            print(codeMap[charac])
-
-        except:
-            shannonCode(Root,charac,'')
+        print(codeMap[charac])
 
     elif(option==2):
         displayShannonCodedFile(Root,fc)
@@ -153,6 +166,9 @@ while True:
         binaryCodedFile(fc)
 
     elif(option==4):
+        decode()
+
+    elif(option==5):
         break
     
 
